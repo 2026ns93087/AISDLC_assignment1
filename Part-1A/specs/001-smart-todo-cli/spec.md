@@ -2,7 +2,7 @@
 
 **Feature Directory**: `specs/001-smart-todo-cli`
 **Created**: 2026-11-22
-**Status**: Draft (awaiting clarification and human review)
+**Status**: Clarified and approved by the student on 2026-11-22 (CL-1 to CL-3 resolved)
 **Governing document**: `.specify/memory/constitution.md` v1.0.0
 
 **Input**: A command-line task manager for one person. Tasks have a title, an optional description,
@@ -101,7 +101,7 @@ guess what went wrong.
 - Title made only of whitespace, or exactly at / one over the length limit (AC-004 to AC-007).
 - Same tag given twice or in different letter case (AC-010).
 - Deleting the highest-numbered task, then adding another: identifiers are never reused (AC-003).
-- A failed command must leave the store file byte-for-byte unchanged (AC-004, AC-034, AC-043).
+- A failed command must leave the store file byte-for-byte unchanged (AC-004, AC-036, AC-043).
 - Store file missing, empty, not JSON, or of an unsupported version (AC-017, AC-043).
 
 ## Requirements *(mandatory)*
@@ -137,8 +137,8 @@ A task has: `id` (integer), `title` (string), `description` (string), `priority`
 - **FR-010**: `todo list --status S` MUST return only tasks with status `S`. An unknown status fails
   with `INVALID_STATUS`.
 - **FR-011**: `todo list --tag T` (option repeatable) MUST return only tasks matching the given
-  tags, comparing case-insensitively. [NEEDS CLARIFICATION: when several `--tag` options are given,
-  must a task carry ALL of them (AND) or ANY of them (OR)? See CL-1]
+  tags, comparing case-insensitively. When several `--tag` options are given, a task MUST carry ALL
+  of them (AND semantics). (Resolved by CL-1.)
 - **FR-012**: `todo list --sort priority` MUST order tasks `high`, `medium`, `low`, with ties broken
   by identifier ascending. `--sort id` is the default. Any other value fails with `INVALID_SORT`.
   Filters (FR-010, FR-011) and sorting MAY be combined; filtering is applied first.
@@ -147,14 +147,15 @@ A task has: `id` (integer), `title` (string), `description` (string), `priority`
   set `updated_at` to the current time, and leave `id`, `status` and `created_at` unchanged.
   Removing a tag the task does not have is not an error. Calling `edit` with no change option is a
   usage error.
-- **FR-014**: [NEEDS CLARIFICATION: may a task whose status is `done` be edited? If not, `edit` on
-  such a task must fail with `TASK_LOCKED`. See CL-2]
+- **FR-014**: A task whose status is `done` MUST NOT be edited: `todo edit` on it fails with
+  `TASK_LOCKED` (exit 1) and the store is unchanged. The task can be edited again after it is
+  reopened with `todo status ID todo`. (Resolved by CL-2.)
 - **FR-015**: `todo status ID NEW_STATUS` MUST change status only along allowed transitions and set
   `updated_at`. Any other change fails with `INVALID_TRANSITION`. Allowed transitions:
-  `todo` to `in_progress`; `in_progress` to `done`; `in_progress` to `todo`; `done` to `todo`.
-  [NEEDS CLARIFICATION: is the direct transition `todo` to `done` also allowed? See CL-3]
-  A transition to the current status is always `INVALID_TRANSITION`. An unknown status value fails
-  with `INVALID_STATUS`.
+  `todo` to `in_progress`; `todo` to `done`; `in_progress` to `done`; `in_progress` to `todo`;
+  `done` to `todo`. (The direct `todo` to `done` transition was added by CL-3.) A transition to
+  the current status is always `INVALID_TRANSITION`. An unknown status value fails with
+  `INVALID_STATUS`.
 - **FR-016**: `todo delete ID` MUST remove the task, persist the change and print
   `{"deleted": ID}`; an unknown identifier fails with `TASK_NOT_FOUND`.
 - **FR-017**: Data MUST be stored in a single UTF-8 JSON file of the form
@@ -222,7 +223,7 @@ store file is byte-for-byte identical before and after the command.
 | AC-019 | FR-010 | Given tasks 1 (`todo`), 2 (`in_progress`), 3 (`in_progress`), when `todo list --status in_progress`, then ids 2 and 3 only, `count` 2. |
 | AC-020 | FR-010 | When `todo list --status bogus`, then exit 1 with `INVALID_STATUS`. |
 | AC-021 | FR-011 | Given task 1 tagged `work`, task 2 tagged `home`, when `todo list --tag work`, then id 1 only. |
-| AC-022 | FR-011 | Given task 1 tagged `home, work` and task 2 tagged `work`, when `todo list --tag work --tag home`, then the result is fixed by CL-1. |
+| AC-022 | FR-011 | Given task 1 tagged `home, work` and task 2 tagged `work`, when `todo list --tag work --tag home`, then only id 1 is returned and `count` is 1 (AND semantics, CL-1). |
 | AC-023 | FR-011 | Given task 1 tagged `work`, when `todo list --tag WORK`, then id 1 is returned. |
 | AC-024 | FR-012 | Given tasks 1 (`low`), 2 (`high`), 3 (`medium`), 4 (`high`), when `todo list --sort priority`, then ids in order 2, 4, 3, 1. |
 | AC-025 | FR-012 | When `todo list --sort name`, then exit 1 with `INVALID_SORT`. |
@@ -231,10 +232,10 @@ store file is byte-for-byte identical before and after the command.
 | AC-028 | FR-013, FR-019 | When `todo edit 1` with no change option, then exit 2 and the store is unchanged. |
 | AC-029 | FR-013, FR-005 | Given task 1 tagged `home`, when `todo edit 1 --add-tag work --remove-tag home --remove-tag absent`, then exit 0 and `tags` is `["work"]`. |
 | AC-030 | FR-013, FR-002 | When `todo edit 1 --title ""`, then exit 1 with `TITLE_REQUIRED`, store unchanged. |
-| AC-031 | FR-014 | Given task 1 has status `done`, when `todo edit 1 --title "X"`, then the result is fixed by CL-2. |
+| AC-031 | FR-014 | Given task 1 has status `done`, when `todo edit 1 --title "X"`, then exit 1 with `TASK_LOCKED`, stdout empty, store unchanged (CL-2). After `todo status 1 todo`, the same edit exits 0. |
 | AC-032 | FR-015 | Given task 1 `todo`, when `todo status 1 in_progress`, then exit 0 and `status` is `in_progress`. |
 | AC-033 | FR-015 | Given task 1 `in_progress`, when run with `TODO_NOW=2026-01-03T08:00:00Z` `todo status 1 done`, then `status` is `done` and `updated_at` is `2026-01-03T08:00:00Z`. |
-| AC-034 | FR-015 | Given task 1 `todo`, when `todo status 1 done`, then the result is fixed by CL-3. |
+| AC-034 | FR-015 | Given task 1 `todo`, when `todo status 1 done`, then exit 0 and `status` is `done` (direct transition allowed, CL-3). |
 | AC-035 | FR-015 | Given task 1 `done`, when `todo status 1 todo`, then exit 0 and `status` is `todo`. |
 | AC-036 | FR-015 | Given task 1 `todo`, when `todo status 1 todo`, then exit 1 with `INVALID_TRANSITION`, store unchanged. |
 | AC-037 | FR-015 | Given task 1 `done`, when `todo status 1 in_progress`, then exit 1 with `INVALID_TRANSITION`, store unchanged. |
@@ -269,16 +270,25 @@ rules in Ruff; NFR-006 traceability gate; NFR-007 secret and absolute-path scan.
 - Python 3.11 or newer is available.
 - Output key order is as shown in AC-001 (insertion order of the fields listed in the data model).
 
-## Open Clarifications (to be resolved by the clarify step)
+## Clarifications
 
-| ID | Question | Affects | Options |
-|----|----------|---------|---------|
-| CL-1 | Several `--tag` options: AND or OR? | FR-011, AC-022 | A: ALL tags must match. B: ANY tag may match. |
-| CL-2 | Can a `done` task be edited? | FR-014, AC-031 | A: No, `TASK_LOCKED`. B: Yes. |
-| CL-3 | Is `todo` to `done` allowed directly? | FR-015, AC-034 | A: No, `INVALID_TRANSITION`. B: Yes. |
+### Session 2026-11-22
+
+| ID | Question | Decision | Affects |
+|----|----------|----------|---------|
+| CL-1 | Several `--tag` options: AND or OR? | A: a task must carry ALL given tags (AND). | FR-011, AC-022 |
+| CL-2 | Can a `done` task be edited? | A: No, `edit` fails with `TASK_LOCKED`; reopen first. | FR-014, AC-031 |
+| CL-3 | Is `todo` to `done` allowed directly? | B: Yes, allowed. | FR-015, AC-034 |
+
+All three decisions were made by the student (options and recommendations were presented first).
 
 ## Change History
 
 | Date | Change | Reason |
 |------|--------|--------|
 | 2026-11-22 | Initial draft | First specification before clarification |
+| 2026-11-22 | CL-1: FR-011 states AND semantics; AC-022 fixed to return id 1 only | Clarification decision |
+| 2026-11-22 | CL-2: FR-014 states `TASK_LOCKED` rule; AC-031 fixed | Clarification decision |
+| 2026-11-22 | CL-3: FR-015 allows `todo` to `done`; AC-034 fixed to exit 0 and `done` | Clarification decision |
+| 2026-11-22 | Edge-case reference for "failed command leaves store unchanged" changed from AC-034 to AC-036 | AC-034 became a success case after CL-3 |
+| 2026-11-22 | Status set to Clarified and approved; [NEEDS CLARIFICATION] markers removed | Student approval |
