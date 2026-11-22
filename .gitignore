@@ -1,0 +1,40 @@
+# Mentor memory (never commit)
+.mentor/
+
+# Course materials (not deliverables)
+AISDLC One Shot.md
+Assignment Submission-Template for students.docx
+Assignment_1_SDD_and_Harness_Engineering.pdf
+Coding Agent_Harness_Lab_Sheet.pdf
+Spec_Driven_Development_GitHub_Spec_Kit_Lab_Sheet.pdf
+
+# Environment files
+.env
+.env.local
+
+# Dependencies
+node_modules/
+__pycache__/
+*.pyc
+venv/
+env/
+
+# Build outputs
+dist/
+build/
+*.egg-info/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
