@@ -84,9 +84,9 @@ form `{code, gate, requirement, expected, observed, stdout, stderr}` (plan, harn
 
 ## Phase 4: Human checkpoint and baseline (student only)
 
-- [ ] T-030 [HUMAN] Review `tests/` and `.harness/` against `spec.md`: every AC row has a test with the exact expected value, no assertion is looser than the spec, no test reads the implementation to decide the expected value
-- [ ] T-031 [HUMAN] Run the checkpoint: `self_check.py` passes, the tests collect and fail on empty `src/`, Ruff is clean on `tests` and `.harness`
-- [ ] T-032 [HUMAN] Create the annotated tag `baseline-1A-before-implement` on the approved commit, with the number of test functions and the number of AC IDs in the annotation; push it. Any later change to a protected path needs a documented amendment
+- [x] T-030 [HUMAN] Review `tests/` and `.harness/` against `spec.md`: every AC row has a test with the exact expected value, no assertion is looser than the spec, no test reads the implementation to decide the expected value
+- [x] T-031 [HUMAN] Run the checkpoint: `self_check.py` passes, the tests collect and fail on empty `src/`, Ruff is clean on `tests` and `.harness`
+- [x] T-032 [HUMAN] Create the annotated tag `baseline-1A-before-implement` on the approved commit, with the number of test functions and the number of AC IDs in the annotation; push it. Any later change to a protected path needs a documented amendment
 
 **Checkpoint**: tag exists on `origin`; the integrity gate passes against it.
 
