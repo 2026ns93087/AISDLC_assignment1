@@ -67,16 +67,16 @@ test functions and the 47 AC IDs covered.
 Gates never import `smart_todo`. Each gate returns PASS or FAIL and, on failure, findings of the
 form `{code, gate, requirement, expected, observed, stdout, stderr}` (plan, harness design).
 
-- [ ] T-020 [AGENT] `.harness/run_harness.py`: run every gate in the fixed order of PD-9, never short-circuit, write `evidence/harness-results/run-N/report.json` plus per-gate stdout and stderr, never overwrite an earlier run, exit 0 only when all gates pass -> constitution VII, Development Workflow 3
-- [ ] T-021 [P] [AGENT] `.harness/gates/integrity.py`: compare `tests/`, `.harness/`, `pyproject.toml` and `specs/` with tag `baseline-1A-before-implement`; fail with `BASELINE_MISSING` when the tag is absent and `PROTECTED_PATH_CHANGED` on any difference (task-list checkbox ticks excepted) -> constitution VII
-- [ ] T-022 [P] [AGENT] `.harness/gates/secret_path_scan.py`: fail on key-like strings and on absolute machine paths in tracked files -> NFR-007, constitution VI
-- [ ] T-023 [P] [AGENT] `.harness/gates/stdlib_imports.py`: parse every file in `src/` with `ast`; fail with `NON_STDLIB_IMPORT` for any import outside `sys.stdlib_module_names` and the local package -> NFR-001
-- [ ] T-024 [P] [AGENT] `.harness/gates/banned_calls.py`: fail with `BANNED_CALL` for `eval`, `exec`, `pickle`, `os.system`, `shell=True` in `src/`, and with `SUPPRESSION_COMMENT` for `# noqa`, `# nosec`, `# type: ignore` in `src/`, `tests/`, `.harness/` -> constitution IV, VI
-- [ ] T-025 [P] [AGENT] `.harness/gates/ruff_gate.py`: run `ruff check src tests .harness --no-cache --output-format json`; map each violation to a finding -> NFR-002, NFR-004
-- [ ] T-026 [P] [AGENT] `.harness/gates/bandit_gate.py`: run `bandit -r src -f json -q`; any result of any severity is a finding -> NFR-003
-- [ ] T-027 [P] [AGENT] `.harness/gates/tests_gate.py`: run `pytest -p no:cacheprovider --junitxml`; each failing test becomes a finding carrying its AC ID, expected and observed text -> AC-001 to AC-047, SC-001
-- [ ] T-028 [P] [AGENT] `.harness/gates/traceability.py`: every `AC-001` to `AC-047` in the spec appears in at least one test name or docstring; fail with `AC_WITHOUT_TEST` -> NFR-006, SC-003
-- [ ] T-029 [AGENT] `.harness/self_check.py` and `.harness/fixtures/`: one deliberately broken input per gate (a lint error, a bandit finding, a banned call, a non-stdlib import, a secret, a missing AC test, a failing test, a modified protected file) plus one good input; print a table showing each gate fails on its fixture and passes on the good input -> plan, "showing every gate can fail"
+- [x] T-020 [AGENT] `.harness/run_harness.py`: run every gate in the fixed order of PD-9, never short-circuit, write `evidence/harness-results/run-N/report.json` plus per-gate stdout and stderr, never overwrite an earlier run, exit 0 only when all gates pass -> constitution VII, Development Workflow 3
+- [x] T-021 [P] [AGENT] `.harness/gates/integrity.py`: compare `tests/`, `.harness/`, `pyproject.toml` and `specs/` with tag `baseline-1A-before-implement`; fail with `BASELINE_MISSING` when the tag is absent and `PROTECTED_PATH_CHANGED` on any difference (task-list checkbox ticks excepted) -> constitution VII
+- [x] T-022 [P] [AGENT] `.harness/gates/secret_path_scan.py`: fail on key-like strings and on absolute machine paths in tracked files -> NFR-007, constitution VI
+- [x] T-023 [P] [AGENT] `.harness/gates/stdlib_imports.py`: parse every file in `src/` with `ast`; fail with `NON_STDLIB_IMPORT` for any import outside `sys.stdlib_module_names` and the local package -> NFR-001
+- [x] T-024 [P] [AGENT] `.harness/gates/banned_calls.py`: fail with `BANNED_CALL` for `eval`, `exec`, `pickle`, `os.system`, `shell=True` in `src/`, and with `SUPPRESSION_COMMENT` for `# noqa`, `# nosec`, `# type: ignore` in `src/`, `tests/`, `.harness/` -> constitution IV, VI
+- [x] T-025 [P] [AGENT] `.harness/gates/ruff_gate.py`: run `ruff check src tests .harness --no-cache --output-format json`; map each violation to a finding -> NFR-002, NFR-004
+- [x] T-026 [P] [AGENT] `.harness/gates/bandit_gate.py`: run `bandit -r src -f json -q`; any result of any severity is a finding -> NFR-003
+- [x] T-027 [P] [AGENT] `.harness/gates/tests_gate.py`: run `pytest -p no:cacheprovider --junitxml`; each failing test becomes a finding carrying its AC ID, expected and observed text -> AC-001 to AC-047, SC-001
+- [x] T-028 [P] [AGENT] `.harness/gates/traceability.py`: every `AC-001` to `AC-047` in the spec appears in at least one test name or docstring; fail with `AC_WITHOUT_TEST` -> NFR-006, SC-003
+- [x] T-029 [AGENT] `.harness/self_check.py` and `.harness/fixtures/`: one deliberately broken input per gate (a lint error, a bandit finding, a banned call, a non-stdlib import, a secret, a missing AC test, a failing test, a modified protected file) plus one good input; print a table showing each gate fails on its fixture and passes on the good input -> plan, "showing every gate can fail"
 
 **Checkpoint**: `self_check.py` shows 8 of 8 broken fixtures rejected and the good input accepted.
 
