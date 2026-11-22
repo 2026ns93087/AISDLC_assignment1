@@ -8,7 +8,7 @@ import sys
 from collections.abc import Callable, Mapping
 from datetime import UTC, datetime
 from pathlib import Path
-from typing import NoReturn
+from typing import NoReturn, TextIO
 
 from smart_todo import domain, storage
 from smart_todo.errors import AppError
@@ -150,12 +150,11 @@ def execute(args: argparse.Namespace) -> object:
     return payload
 
 
-def emit(stream: object, value: object) -> None:
+def emit(stream: TextIO, value: object) -> None:
     """Write one JSON value and a newline as UTF-8 bytes, so output is identical everywhere."""
     data = (json.dumps(value) + "\n").encode("utf-8")
-    binary = stream.buffer  # type: ignore[attr-defined]
-    binary.write(data)
-    binary.flush()
+    stream.buffer.write(data)
+    stream.buffer.flush()
 
 
 def main(argv: list[str] | None = None) -> int:

@@ -4,17 +4,16 @@ import json
 import os
 import tempfile
 from pathlib import Path
-from typing import Any
 
 from smart_todo.domain import Store, empty_store
 from smart_todo.errors import AppError
 
 
-def is_plain_int(value: Any) -> bool:
+def is_plain_int(value: object) -> bool:
     return isinstance(value, int) and not isinstance(value, bool)
 
 
-def check_shape(data: Any) -> Store:
+def check_shape(data: object) -> Store:
     """Return the store when it has the FR-017 form, otherwise raise STORAGE_CORRUPT."""
     if not isinstance(data, dict):
         raise AppError("STORAGE_CORRUPT", "The store file must contain a JSON object.")
