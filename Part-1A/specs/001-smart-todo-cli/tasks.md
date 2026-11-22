@@ -96,14 +96,14 @@ form `{code, gate, requirement, expected, observed, stdout, stderr}` (plan, harn
 
 Implement only what the spec requires; do not edit `tests/`, `.harness/` or `pyproject.toml`.
 
-- [ ] T-040 [AGENT] `src/smart_todo/__init__.py`, `__main__.py` (calls `cli.main()`), `errors.py` with `AppError(code, message, exit_code)` and the error catalogue -> FR-018, FR-019, data-model error catalogue
-- [ ] T-041 [AGENT] `src/smart_todo/storage.py`: load (missing file = empty store, never creates the file on read), validate shape (`STORAGE_CORRUPT`), atomic save via `mkstemp` + `os.replace`, binary UTF-8 write with `\n`, temp file removed on failure -> FR-017, FR-021, FR-022, R-3, R-4
-- [ ] T-042 [AGENT] [US-001] `src/smart_todo/domain.py`: validation of title, description, priority, tags and task creation with `next_id` -> FR-002, FR-003, FR-004, FR-005, FR-006, FR-007
-- [ ] T-043 [AGENT] [US-002] [US-003] [US-004] `domain.py`: lookup by id, status and tag filter (AND, case-insensitive), sort by id or priority -> FR-008, FR-009, FR-010, FR-011, FR-012
-- [ ] T-044 [AGENT] [US-005] `domain.py`: edit with add/remove tags, `updated_at`, `TASK_LOCKED` on done tasks -> FR-013, FR-014
-- [ ] T-045 [AGENT] [US-006] `domain.py`: status transition table from data-model with `INVALID_TRANSITION` and `INVALID_STATUS` -> FR-015
-- [ ] T-046 [AGENT] [US-007] `domain.py`: delete by id that never reuses identifiers -> FR-007, FR-016
-- [ ] T-047 [AGENT] [US-008] `src/smart_todo/cli.py`: `argparse` subclass with JSON error output and `add_help=False` (PD-1), `--file` before the command (PD-2), string identifiers validated by `[1-9][0-9]*` (PD-7), clock from `TODO_NOW` (PD-6, FR-020), JSON output rules and exit codes (PD-5) -> FR-001, FR-008, FR-009, FR-016, FR-018, FR-019, FR-020, FR-023
+- [x] T-040 [AGENT] `src/smart_todo/__init__.py`, `__main__.py` (calls `cli.main()`), `errors.py` with `AppError(code, message, exit_code)` and the error catalogue -> FR-018, FR-019, data-model error catalogue
+- [x] T-041 [AGENT] `src/smart_todo/storage.py`: load (missing file = empty store, never creates the file on read), validate shape (`STORAGE_CORRUPT`), atomic save via `mkstemp` + `os.replace`, binary UTF-8 write with `\n`, temp file removed on failure -> FR-017, FR-021, FR-022, R-3, R-4
+- [x] T-042 [AGENT] [US-001] `src/smart_todo/domain.py`: validation of title, description, priority, tags and task creation with `next_id` -> FR-002, FR-003, FR-004, FR-005, FR-006, FR-007
+- [x] T-043 [AGENT] [US-002] [US-003] [US-004] `domain.py`: lookup by id, status and tag filter (AND, case-insensitive), sort by id or priority -> FR-008, FR-009, FR-010, FR-011, FR-012
+- [x] T-044 [AGENT] [US-005] `domain.py`: edit with add/remove tags, `updated_at`, `TASK_LOCKED` on done tasks -> FR-013, FR-014
+- [x] T-045 [AGENT] [US-006] `domain.py`: status transition table from data-model with `INVALID_TRANSITION` and `INVALID_STATUS` -> FR-015
+- [x] T-046 [AGENT] [US-007] `domain.py`: delete by id that never reuses identifiers -> FR-007, FR-016
+- [x] T-047 [AGENT] [US-008] `src/smart_todo/cli.py`: `argparse` subclass with JSON error output and `add_help=False` (PD-1), `--file` before the command (PD-2), string identifiers validated by `[1-9][0-9]*` (PD-7), clock from `TODO_NOW` (PD-6, FR-020), JSON output rules and exit codes (PD-5) -> FR-001, FR-008, FR-009, FR-016, FR-018, FR-019, FR-020, FR-023
 
 **Checkpoint**: `python -m pytest -p no:cacheprovider` runs and shows the implementation's results (informal, not evidence); the first formal harness run is in Phase 6.
 
@@ -111,18 +111,18 @@ Implement only what the spec requires; do not edit `tests/`, `.harness/` or `pyp
 
 ## Phase 6: Formal runs, repair and evidence
 
-- [ ] T-050 [AGENT] Copy `src/` unchanged to `evidence/initial-generation/` **before** the first formal harness run; record the commit hash -> constitution VII
-- [ ] T-051 [AGENT] Run the harness from the working tree; keep the output as `evidence/harness-results/run-1/` -> SC-001, SC-002, SC-003
-- [ ] T-052 [AGENT] If any gate fails for a genuine reason: pass the structured findings, unchanged, to the coding agent; repair `src/` only; re-run all gates as the next `run-N`; at most 2 repair attempts, then stop for manual review -> constitution VII. Do not stage a failure. If run-1 passes, record that and skip repair
-- [ ] T-053 [AGENT] Fresh-clone check: clone the repository to a new folder, run the harness there, keep the output -> constitution Additional Constraints
-- [ ] T-054 [AGENT] Copy the final `src/` to `evidence/final-generation/` after the last passing run -> constitution VII
+- [x] T-050 [AGENT] Copy `src/` unchanged to `evidence/initial-generation/` **before** the first formal harness run; record the commit hash -> constitution VII
+- [x] T-051 [AGENT] Run the harness from the working tree; keep the output as `evidence/harness-results/run-1/` -> SC-001, SC-002, SC-003
+- [x] T-052 [AGENT] If any gate fails for a genuine reason: pass the structured findings, unchanged, to the coding agent; repair `src/` only; re-run all gates as the next `run-N`; at most 2 repair attempts, then stop for manual review -> constitution VII. Do not stage a failure. If run-1 passes, record that and skip repair
+- [x] T-053 [AGENT] Fresh-clone check: clone the repository to a new folder, run the harness there, keep the output -> constitution Additional Constraints
+- [x] T-054 [AGENT] Copy the final `src/` to `evidence/final-generation/` after the last passing run -> constitution VII
 
 ---
 
 ## Phase 7: Documentation, human review and decision
 
-- [ ] T-060 [AGENT] `Part-1A/README.md`: install, run, test and harness commands; setup-environment note (OS, tool versions, Spec Kit 1.4.3, copilot integration, `--system-certs` install workaround); known limitation PD-4 (Bandit scope) -> plan, quickstart
-- [ ] T-061 [AGENT] Run the quickstart commands by hand and compare with `quickstart.md` -> SC-004
+- [x] T-060 [AGENT] `Part-1A/README.md`: install, run, test and harness commands; setup-environment note (OS, tool versions, Spec Kit 1.4.3, copilot integration, `--system-certs` install workaround); known limitation PD-4 (Bandit scope) -> plan, quickstart
+- [x] T-061 [AGENT] Run the quickstart commands by hand and compare with `quickstart.md` -> SC-004
 - [ ] T-062 [HUMAN] Write `evidence/harness-log.md` in your own words from the run records (brief section 5.3 lists what it must show)
 - [ ] T-063 [HUMAN] Record the final ACCEPT or REJECT decision, known limitations and justification
 
