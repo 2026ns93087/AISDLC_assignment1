@@ -12,12 +12,19 @@ Spec_Driven_Development_GitHub_Spec_Kit_Lab_Sheet.pdf
 .env
 .env.local
 
-# Dependencies
+# Dependencies and Python caches
 node_modules/
 __pycache__/
 *.pyc
 venv/
 env/
+.venv/
+.pytest_cache/
+.ruff_cache/
+
+# Local task stores created while running the CLI by hand
+todo.json
+demo.json
 
 # Build outputs
 dist/

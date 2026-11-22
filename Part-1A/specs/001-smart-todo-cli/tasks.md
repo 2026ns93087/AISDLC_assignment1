@@ -33,9 +33,9 @@ are completed first.
 
 ## Phase 1: Setup
 
-- [ ] T-001 [AGENT] Create `pyproject.toml` with pytest, ruff and bandit configuration exactly as in plan PD-3 and PD-4 (no `ignore`, no `per-file-ignores`, `line-length = 100`, `max-complexity = 10`, `max-statements = 50`, `requires-python = ">=3.11"`) -> NFR-002, NFR-003, NFR-004, constitution IV
-- [ ] T-002 [AGENT] Verify `pytest`, `ruff` and `bandit` install and run on this machine (Windows ARM64, Python 3.15); if not, pin an interpreter with `uv` as in research R-8 and record the versions -> plan PR-1
-- [ ] T-003 [P] [AGENT] Extend root `.gitignore` for `.venv/`, `.pytest_cache/`, `.ruff_cache/`, `todo.json`, `demo.json` -> constitution VI, NFR-007
+- [x] T-001 [AGENT] Create `pyproject.toml` with pytest, ruff and bandit configuration exactly as in plan PD-3 and PD-4 (no `ignore`, no `per-file-ignores`, `line-length = 100`, `max-complexity = 10`, `max-statements = 50`, `requires-python = ">=3.11"`) -> NFR-002, NFR-003, NFR-004, constitution IV
+- [x] T-002 [AGENT] Verify `pytest`, `ruff` and `bandit` install and run on this machine (Windows ARM64, Python 3.15); if not, pin an interpreter with `uv` as in research R-8 and record the versions -> plan PR-1
+- [x] T-003 [P] [AGENT] Extend root `.gitignore` for `.venv/`, `.pytest_cache/`, `.ruff_cache/`, `todo.json`, `demo.json` -> constitution VI, NFR-007
 
 **Checkpoint**: all three tools run and report their versions.
 
