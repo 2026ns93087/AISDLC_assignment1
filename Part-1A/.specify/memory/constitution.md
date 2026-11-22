@@ -4,8 +4,11 @@
 ### I. Specification Is the Source of Truth
 Every behaviour MUST trace to a numbered requirement. User stories use `US-nnn`, functional
 requirements `FR-nnn`, acceptance criteria `AC-nnn`, non-functional requirements `NFR-nnn`, and
-tasks `T-nnn`. Every commit message MUST begin with at least one of these IDs (format
-`<ID> : <message>`). Code that implements no requirement MUST NOT be added. An ambiguity found
+tasks `T-nnn`. Every commit message MUST begin with at least one ID (format `<ID> : <message>`).
+A commit that changes `src/`, `tests/` or `.harness/` MUST begin with a `T-`, `AC-`, `FR-`, `NFR-`
+or `US-` ID. Other commits MAY begin with a process ID: `SETUP`, `CONST`, `PLAN`, `CL`, `DOCS` or
+`EVID` (with a number, for example `PLAN-001`). Code that implements no requirement MUST NOT be
+added. An ambiguity found
 after approval MUST be fixed in the upstream artifact (spec, plan or tasks) with a dated entry in
 that artifact's change history before the code changes.
 
@@ -42,8 +45,10 @@ credential or token may appear in source, tests, evidence or history.
 ### VII. Protected Paths and Preserved Evidence
 After the baseline tag for this part is created, the following paths are protected and MUST NOT be
 modified by any contributor, including automated tooling, except through a documented amendment:
-`tests/`, `.harness/`, `pyproject.toml` lint/security/test configuration, and the files under
-`specs/`. Failing tests MUST NOT be deleted, skipped, weakened or marked expected-failure. The first
+`tests/`, `.harness/`, `pyproject.toml` lint/security/test configuration, and these files under
+`specs/001-smart-todo-cli/`: `spec.md`, `plan.md`, `data-model.md` and everything in `contracts/`.
+The checkbox state in `tasks.md` is the only change allowed to a file under `specs/` without an
+amendment. Failing tests MUST NOT be deleted, skipped, weakened or marked expected-failure. The first
 generated implementation MUST be copied unchanged to `evidence/initial-generation/` before the
 first formal harness run. Every harness run MUST be kept under `evidence/harness-results/run-N/`
 and never overwritten. A repair cycle is limited to 2 attempts before a manual review.
@@ -82,6 +87,10 @@ deviation MUST be justified in the plan's complexity section.
 ### Amendment Log
 
 - 2026-11-22 : 1.0.0 : Initial ratification.
+- 2026-11-22 : 1.1.0 : MINOR. Principle I allows process IDs for commits that do not touch
+  `src/`, `tests/` or `.harness/` (analysis A-1; six earlier commits used them). Principle VII lists
+  the protected files under `specs/` and exempts `tasks.md` checkbox state (analysis A-3). Approved
+  by the student.
 
-**Version**: 1.0.0 | **Ratified**: 2026-11-22 | **Last Amended**: 2026-11-22
+**Version**: 1.1.0 | **Ratified**: 2026-11-22 | **Last Amended**: 2026-11-22
 

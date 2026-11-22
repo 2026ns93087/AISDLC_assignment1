@@ -31,6 +31,17 @@ Scripted checks plus a manual read of every artifact against the constitution.
 | A-7 | LOW | plan PD-4 | Bandit does not scan `tests/` or `.harness/`. | Disclosed limitation. Record it in the README and harness log. |
 | A-8 | INFO | tasks.md | Phase order puts tests and harness before implementation, which differs from the Spec Kit template. Intentional (constitution Development Workflow 1 and 2). | None. |
 
+## Resolutions (2026-11-22, student approved the recommendations)
+
+| ID | Resolution |
+|----|------------|
+| A-1 | Constitution amended to v1.1.0 (principle I). Process IDs allowed for commits outside `src/`, `tests/`, `.harness/`. Pushed history kept. |
+| A-2 | FR-019 and AC-045 now name `USAGE_ERROR`. Spec change history updated. |
+| A-3 | Constitution v1.1.0 principle VII lists the protected spec files and exempts `tasks.md` checkbox state. |
+| A-4 | Accepted. Limit to be stated in the harness log. T-030 is the control. |
+| A-5 | Interface convention now says `--file` goes before the command. |
+| A-6, A-7, A-8 | Accepted as noted. No artifact change. |
+
 ## Counts
 
 Critical 1, High 0, Medium 3, Low 3, Info 1.

@@ -3,7 +3,8 @@
 **Feature Directory**: `specs/001-smart-todo-cli`
 **Created**: 2026-11-22
 **Status**: Clarified and approved by the student on 2026-11-22 (CL-1 to CL-3 resolved)
-**Governing document**: `.specify/memory/constitution.md` v1.0.0
+
+**Governing document**: `.specify/memory/constitution.md` v1.1.0
 
 **Input**: A command-line task manager for one person. Tasks have a title, an optional description,
 a priority, tags and a status. Tasks can be added, listed, filtered by status and tag, sorted by
@@ -20,8 +21,12 @@ tasks, sub-tasks, multiple lists, concurrent writers, import/export formats othe
 file, colour or interactive output.
 
 **Interface convention**: the program is invoked as `python -m smart_todo` and is written `todo`
-below. Global option `--file PATH` selects the store file (default `todo.json` in the current
-directory). Environment variable `TODO_NOW` overrides the clock (see FR-020).
+below. Global option `--file PATH`, placed before the command (`todo --file PATH add ...`), selects
+the store file (default `todo.json` in the current directory). Environment variable `TODO_NOW` overrides the clock (see FR-020).
+
+
+
+
 
 ## User Scenarios & Testing *(mandatory)*
 
@@ -166,7 +171,8 @@ A task has: `id` (integer), `title` (string), `description` (string), `priority`
   `{"error": {"code": "<CODE>", "message": "<text>"}}` on stderr.
 - **FR-019**: Exit codes: `0` success; `1` validation or domain error; `2` usage error (unknown
   command, missing or malformed arguments, identifier that is not a positive integer, `edit` with
-  no change option).
+  no change option). A usage error carries the code `USAGE_ERROR`, except an invalid identifier,
+  which carries `INVALID_ID` (FR-023).
 - **FR-020**: If environment variable `TODO_NOW` is set it MUST be used as the current time; its
   value MUST match `YYYY-MM-DDTHH:MM:SSZ`, otherwise the command fails with `INVALID_CLOCK`
   (exit 1). If unset, the system UTC time is used, truncated to whole seconds.
@@ -246,7 +252,9 @@ store file is byte-for-byte identical before and after the command.
 | AC-042 | FR-017 | After any successful write, the store file parses as UTF-8 JSON with `version` 1, an integer `next_id` and a `tasks` list, and the directory holds no file other than the store. |
 | AC-043 | FR-021 | Given the store file contains `not json`, when `todo list`, then exit 1 with `STORAGE_CORRUPT` and the file is unchanged; the same holds for `{"version": 2, "next_id": 1, "tasks": []}`. |
 | AC-044 | FR-018 | For every successful command stderr is empty; for every failed command stdout is empty and stderr is exactly one JSON object with `error.code` and `error.message`. |
-| AC-045 | FR-019 | When `todo frobnicate`, or `todo add` with no `--title`, then exit 2. |
+
+
+| AC-045 | FR-019 | When `todo frobnicate`, or `todo add` with no `--title`, then each exits 2 with stdout empty and stderr error code `USAGE_ERROR`. |
 | AC-046 | FR-020 | When `TODO_NOW=yesterday` and `todo add --title "x"`, then exit 1 with `INVALID_CLOCK`, store unchanged. |
 | AC-047 | NFR-005 | Running the same command twice against identical stores with the same `TODO_NOW` gives byte-identical stdout and store file. |
 
@@ -292,3 +300,5 @@ All three decisions were made by the student (options and recommendations were p
 | 2026-11-22 | CL-3: FR-015 allows `todo` to `done`; AC-034 fixed to exit 0 and `done` | Clarification decision |
 | 2026-11-22 | Edge-case reference for "failed command leaves store unchanged" changed from AC-034 to AC-036 | AC-034 became a success case after CL-3 |
 | 2026-11-22 | Status set to Clarified and approved; [NEEDS CLARIFICATION] markers removed | Student approval |
+| 2026-11-22 | A-2: FR-019 names `USAGE_ERROR`; AC-045 asserts that code | Cross-artifact analysis, approved by the student |
+| 2026-11-22 | A-5: Interface convention states `--file` goes before the command | Cross-artifact analysis, approved by the student |
