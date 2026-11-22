@@ -105,7 +105,7 @@ Implement only what the spec requires; do not edit `tests/`, `.harness/` or `pyp
 - [ ] T-046 [AGENT] [US-007] `domain.py`: delete by id that never reuses identifiers -> FR-007, FR-016
 - [ ] T-047 [AGENT] [US-008] `src/smart_todo/cli.py`: `argparse` subclass with JSON error output and `add_help=False` (PD-1), `--file` before the command (PD-2), string identifiers validated by `[1-9][0-9]*` (PD-7), clock from `TODO_NOW` (PD-6, FR-020), JSON output rules and exit codes (PD-5) -> FR-001, FR-008, FR-009, FR-016, FR-018, FR-019, FR-020, FR-023
 
-**Checkpoint**: `python .harness/run_harness.py --dry` reports test results; first formal run is in Phase 6.
+**Checkpoint**: `python -m pytest -p no:cacheprovider` runs and shows the implementation's results (informal, not evidence); the first formal harness run is in Phase 6.
 
 ---
 
