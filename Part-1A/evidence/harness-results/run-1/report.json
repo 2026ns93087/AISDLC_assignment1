@@ -1,0 +1,98 @@
+{
+  "run": 1,
+  "result": "FAIL",
+  "timestamp_utc": "2026-11-22T15:19:23Z",
+  "baseline_tag": "baseline-1A-before-implement",
+  "git": {
+    "commit": "926400518ffd8b054ec59d5013a3848f7a7f17f0",
+    "working_tree_clean": true
+  },
+  "tools": {
+    "python": "3.13.17",
+    "ruff": "ruff 0.17.6",
+    "bandit": "__main__.py 1.9.4",
+    "pytest": "pytest 9.2.0"
+  },
+  "gates": [
+    {
+      "gate": "integrity",
+      "status": "PASS",
+      "finding_count": 0,
+      "findings": []
+    },
+    {
+      "gate": "secret_path_scan",
+      "status": "PASS",
+      "finding_count": 0,
+      "findings": []
+    },
+    {
+      "gate": "stdlib_imports",
+      "status": "PASS",
+      "finding_count": 0,
+      "findings": []
+    },
+    {
+      "gate": "banned_calls",
+      "status": "FAIL",
+      "finding_count": 1,
+      "findings": [
+        {
+          "code": "SUPPRESSION_COMMENT",
+          "gate": "banned_calls",
+          "requirement": "constitution IV, VI",
+          "expected": "no comment that silences a tool",
+          "observed": "found 'type: ignore'",
+          "location": "src/smart_todo/cli.py:156",
+          "stdout": "",
+          "stderr": ""
+        }
+      ]
+    },
+    {
+      "gate": "ruff",
+      "status": "FAIL",
+      "finding_count": 2,
+      "findings": [
+        {
+          "code": "RUFF_ANN401",
+          "gate": "ruff",
+          "requirement": "NFR-002",
+          "expected": "0 Ruff findings",
+          "observed": "Dynamically typed expressions (typing.Any) are disallowed in `value`",
+          "location": "src/smart_todo/storage.py:13",
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "code": "RUFF_ANN401",
+          "gate": "ruff",
+          "requirement": "NFR-002",
+          "expected": "0 Ruff findings",
+          "observed": "Dynamically typed expressions (typing.Any) are disallowed in `data`",
+          "location": "src/smart_todo/storage.py:17",
+          "stdout": "",
+          "stderr": ""
+        }
+      ]
+    },
+    {
+      "gate": "bandit",
+      "status": "PASS",
+      "finding_count": 0,
+      "findings": []
+    },
+    {
+      "gate": "tests",
+      "status": "PASS",
+      "finding_count": 0,
+      "findings": []
+    },
+    {
+      "gate": "traceability",
+      "status": "PASS",
+      "finding_count": 0,
+      "findings": []
+    }
+  ]
+}
