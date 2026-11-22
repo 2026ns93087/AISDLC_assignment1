@@ -47,15 +47,15 @@ All tests run the CLI in a subprocess through the helper in T-010 and import not
 `src/smart_todo` (plan PD-8). Every test function name starts with `test_ac_NNN` or its docstring
 names the AC ID. Assertions are exact (constitution III).
 
-- [ ] T-010 [AGENT] Create `tests/conftest.py`: helper `run_cli(args, store, now, env)` returning exit code, stdout, stderr and the store bytes; fixture giving a temp directory and default `TODO_NOW=2026-01-01T09:00:00Z` -> spec AC preamble, PD-8
-- [ ] T-011 [P] [AGENT] [US-001] `tests/test_us001_add.py` -> AC-001, AC-002, AC-004, AC-005, AC-006, AC-007, AC-008, AC-009, AC-010, AC-011, AC-012, AC-013 (FR-001 to FR-007)
-- [ ] T-012 [P] [AGENT] [US-002] `tests/test_us002_view.py` -> AC-014, AC-015, AC-016, AC-017, AC-018 (FR-008, FR-009, FR-022, FR-023)
-- [ ] T-013 [P] [AGENT] [US-003] `tests/test_us003_filter.py` -> AC-019, AC-020, AC-021, AC-022, AC-023 (FR-010, FR-011, CL-1)
-- [ ] T-014 [P] [AGENT] [US-004] `tests/test_us004_sort.py` -> AC-024, AC-025, AC-026 (FR-012)
-- [ ] T-015 [P] [AGENT] [US-005] `tests/test_us005_edit.py` -> AC-027, AC-028, AC-029, AC-030, AC-031 (FR-013, FR-014, CL-2)
-- [ ] T-016 [P] [AGENT] [US-006] `tests/test_us006_status.py` -> AC-032, AC-033, AC-034, AC-035, AC-036, AC-037, AC-038 (FR-015, CL-3)
-- [ ] T-017 [P] [AGENT] [US-007] `tests/test_us007_delete.py` -> AC-003, AC-039, AC-040 (FR-007, FR-016)
-- [ ] T-018 [P] [AGENT] [US-008] `tests/test_us008_storage.py` -> AC-041, AC-042, AC-043, AC-044, AC-045, AC-046, AC-047 (FR-017 to FR-021, NFR-005)
+- [x] T-010 [AGENT] Create `tests/conftest.py`: helper `run_cli(args, store, now, env)` returning exit code, stdout, stderr and the store bytes; fixture giving a temp directory and default `TODO_NOW=2026-01-01T09:00:00Z` -> spec AC preamble, PD-8
+- [x] T-011 [P] [AGENT] [US-001] `tests/test_us001_add.py` -> AC-001, AC-002, AC-004, AC-005, AC-006, AC-007, AC-008, AC-009, AC-010, AC-011, AC-012, AC-013 (FR-001 to FR-007)
+- [x] T-012 [P] [AGENT] [US-002] `tests/test_us002_view.py` -> AC-014, AC-015, AC-016, AC-017, AC-018 (FR-008, FR-009, FR-022, FR-023)
+- [x] T-013 [P] [AGENT] [US-003] `tests/test_us003_filter.py` -> AC-019, AC-020, AC-021, AC-022, AC-023 (FR-010, FR-011, CL-1)
+- [x] T-014 [P] [AGENT] [US-004] `tests/test_us004_sort.py` -> AC-024, AC-025, AC-026 (FR-012)
+- [x] T-015 [P] [AGENT] [US-005] `tests/test_us005_edit.py` -> AC-027, AC-028, AC-029, AC-030, AC-031 (FR-013, FR-014, CL-2)
+- [x] T-016 [P] [AGENT] [US-006] `tests/test_us006_status.py` -> AC-032, AC-033, AC-034, AC-035, AC-036, AC-037, AC-038 (FR-015, CL-3)
+- [x] T-017 [P] [AGENT] [US-007] `tests/test_us007_delete.py` -> AC-003, AC-039, AC-040 (FR-007, FR-016)
+- [x] T-018 [P] [AGENT] [US-008] `tests/test_us008_storage.py` -> AC-041, AC-042, AC-043, AC-044, AC-045, AC-046, AC-047 (FR-017 to FR-021, NFR-005)
 
 **Checkpoint**: against an empty `src/`, every test collects and fails (red). Record the count of
 test functions and the 47 AC IDs covered.
