@@ -4,7 +4,7 @@
 
 **Input**: Clarified specification `specs/001-smart-todo-cli/spec.md` (CL-1 to CL-3 resolved)
 
-**Status**: Draft, awaiting human plan review (gate before `tasks`)
+**Status**: Approved by the student on 2026-11-22 (human review gate passed, PD-1 to PD-9 accepted as written)
 
 ## Summary
 
