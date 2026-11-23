@@ -45,3 +45,8 @@ Thumbs.db
 *.log
 npm-debug.log*
 
+
+# Part 1B: offline harness checks and local scratch
+Part-1B/.harness/fake-runs/
+Part-1B/.harness/scratch-gate-runs/
+Part-1B/trace*.json
