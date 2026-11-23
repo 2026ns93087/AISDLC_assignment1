@@ -39,8 +39,8 @@ Legend: `[x]` done and checked here, `[ ]` open, `[AGENT]` done by the coding ag
 ## Phase 5: Needs you
 
 - [x] T-100 [STUDENT] Review `spec.md`: decisions D-1 to D-9, clarifications CL-1 to CL-4, thresholds TH-001 to TH-007. Change anything you disagree with BEFORE the first real run.
-- [ ] T-101 [STUDENT] Commit the work, then create the tag `baseline-1B-before-implement` (the integrity gate needs it).
-- [ ] T-102 [STUDENT] Run the real evaluation: `python .harness/run_eval.py` (uses your key and quota). Keep every run.
-- [ ] T-103 [STUDENT] If a run fails: read the findings, fix `src/` or `prompts/system.md` (never the dataset or thresholds), and run again. Keep the failed run as evidence.
-- [ ] T-104 [STUDENT] Run `python .harness/run_harness.py` after the tag exists; all 8 gates must pass.
+- [x] T-101 [STUDENT] Commit the work, then create the tag `baseline-1B-before-implement` (the integrity gate needs it).
+- [x] T-102 [STUDENT] Run the real evaluation: `python .harness/run_eval.py` (uses your key and quota). Keep every run.
+- [x] T-103 [STUDENT] If a run fails: read the findings, fix `src/` or `prompts/system.md` (never the dataset or thresholds), and run again. Keep the failed run as evidence.
+- [x] T-104 [STUDENT] Run `python .harness/run_harness.py` after the tag exists; all 8 gates must pass.
 - [ ] T-105 [STUDENT] Fresh-clone run on a second folder or machine (SC-005).

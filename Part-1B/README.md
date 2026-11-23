@@ -15,6 +15,7 @@ cd Part-1B
 uv venv .venv --system-certs
 uv pip install --python .venv\Scripts\python.exe --system-certs -r requirements-dev.txt
 copy .env.example .env      # then put your own key after GEMINI_API_KEY=
+# optional, if the default model is too slow for your key: add the line GEMINI_MODEL=gemini-3.5-flash-lite
 ```
 
 Python 3.11 or newer. The runtime needs nothing beyond the standard library. The `.env` file is
@@ -63,3 +64,30 @@ The gate runner needs the tag `baseline-1B-before-implement` and `git`.
 | `.harness/` | static gates, the three evaluation layers, the runners |
 | `evidence/eval-runs/run-N/` | every real evaluation run, never overwritten |
 | `evidence/gate-runs/run-N/` | every static gate run |
+
+## Results
+
+The real evaluation uses `gemini-3.5-flash-lite` at temperature 0 with JSON output. Every run is kept.
+
+| Run | Verdict | What happened |
+|-----|---------|---------------|
+| `evidence/eval-runs/run-1` | FAIL | EV-026 ("Reschedule my dentist reminder"): the model asked the right question but set `target_id`, which a clarify answer must keep null (INV-001, exit 3 `MODEL_OUTPUT_INVALID`). Structure, invariants and guardrails 35/36 and 19/20; semantic score 0.976. Reproduced three times (`repro-EV-026.json`). |
+| `evidence/eval-runs/run-2` | PASS | After one rule was added to `prompts/system.md` (a clarify answer keeps `target_id` null). All metrics 1.000, all seven thresholds met, 0 findings. |
+
+Static gates: `evidence/gate-runs/run-1` (before the repair) and `run-2` (after) passed all 8.
+The first generation (the code as first committed, `97303af`) is in `evidence/initial-generation/`
+and the final state in `evidence/final-generation/`; they differ in `config.py` (the key-pattern fix
+found on the first real call) and `prompts/system.md` (the repair).
+
+## Notes and limitations
+
+- Two things were found on the first real use. The accepted key pattern did not allow a dot, which
+  current Google keys contain (fixed in `src/reminder_agent/config.py`). The default model in the
+  specification, `gemini-flash-latest`, did not answer within the timeout for this key, so
+  `GEMINI_MODEL=gemini-3.5-flash-lite` is set in the local `.env`. The specification was not changed.
+- The specification, plan, code, tests, dataset and harness were produced in one pass; the baseline tag
+  was created afterwards. The tests were written by the same agent that wrote the code, and they are
+  independent only in that they were frozen and are run by a separate harness.
+- The dataset has 40 cases (36 reach the model). One passing run shows that the thresholds were met
+  once; the model's replies vary, so a second run could differ.
+- Real runs use your key and your quota (about 36 calls). A free key can hit its daily limit.
