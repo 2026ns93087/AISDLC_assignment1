@@ -43,4 +43,4 @@ Legend: `[x]` done and checked here, `[ ]` open, `[AGENT]` done by the coding ag
 - [x] T-102 [STUDENT] Run the real evaluation: `python .harness/run_eval.py` (uses your key and quota). Keep every run.
 - [x] T-103 [STUDENT] If a run fails: read the findings, fix `src/` or `prompts/system.md` (never the dataset or thresholds), and run again. Keep the failed run as evidence.
 - [x] T-104 [STUDENT] Run `python .harness/run_harness.py` after the tag exists; all 8 gates must pass.
-- [ ] T-105 [STUDENT] Fresh-clone run on a second folder or machine (SC-005).
+- [x] T-105 [STUDENT] Fresh-clone run on a second folder or machine (SC-005).
