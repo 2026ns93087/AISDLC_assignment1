@@ -21,7 +21,7 @@ DEFAULT_TIMEOUT = 60.0
 DEFAULT_DELAY = 5.0
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 NAME_LINE = re.compile(r"(?:export\s+)?([A-Za-z_][A-Za-z0-9_]*)\s*=(.*)")
-KEY_PATTERN = re.compile(r"[A-Za-z0-9_-]{8,256}")
+KEY_PATTERN = re.compile(r"[A-Za-z0-9._-]{8,256}")
 MODEL_PATTERN = re.compile(r"[A-Za-z0-9._-]{1,64}")
 REDACTED = "<redacted>"
 
