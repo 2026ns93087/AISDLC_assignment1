@@ -1,0 +1,26 @@
+[
+  {
+    "repro": 1,
+    "case": "EV-026",
+    "request": "Reschedule my dentist reminder",
+    "error_code": "MODEL_OUTPUT_INVALID",
+    "model": "gemini-3.5-flash-lite",
+    "raw_text": "{\n  \"intent\": \"clarify\",\n  \"title\": null,\n  \"due_at\": null,\n  \"target_id\": \"r1\",\n  \"snooze_minutes\": null,\n  \"missing\": [\n    \"time\"\n  ],\n  \"message\": \"When would you like to reschedule your Dentist appointment reminder to?\"\n}"
+  },
+  {
+    "repro": 2,
+    "case": "EV-026",
+    "request": "Reschedule my dentist reminder",
+    "error_code": "MODEL_OUTPUT_INVALID",
+    "model": "gemini-3.5-flash-lite",
+    "raw_text": "{\"intent\":\"clarify\",\"title\":null,\"due_at\":null,\"target_id\":\"r1\",\"snooze_minutes\":null,\"missing\":[\"time\"],\"message\":\"When would you like to reschedule your Dentist appointment to?\"}"
+  },
+  {
+    "repro": 3,
+    "case": "EV-026",
+    "request": "Reschedule my dentist reminder",
+    "error_code": "MODEL_OUTPUT_INVALID",
+    "model": "gemini-3.5-flash-lite",
+    "raw_text": "{\"intent\":\"clarify\",\"title\":null,\"due_at\":null,\"target_id\":\"r1\",\"snooze_minutes\":null,\"missing\":[\"time\"],\"message\":\"When would you like to reschedule your Dentist appointment to?\"}"
+  }
+]
