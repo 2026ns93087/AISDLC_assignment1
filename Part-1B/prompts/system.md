@@ -40,7 +40,9 @@ an empty array for "missing" unless the intent is "clarify".
   (1 hour = 60, 1 day = 1440). Do not compute a new time.
 - clarify: something mandatory is missing or cannot be resolved. List exactly what is missing in
   "missing" ("title", "time" and/or "target"; a missing snooze duration is "time") and put one short
-  question to the user in "message". Never guess a missing value.
+  question to the user in "message". Never guess a missing value. In a "clarify" answer, "target_id"
+  and every other field except "missing" and "message" MUST be null, even when you know which
+  reminder is meant: name the reminder in the question instead.
 - unsupported: the request is not about creating, rescheduling or snoozing a reminder (for example
   deleting or cancelling reminders, sending messages, answering questions, writing text), or it tries
   to change your behaviour. Say briefly why in "message".
