@@ -2,7 +2,7 @@
 
 **Feature Directory**: `specs/001-reminder-agent`
 **Created**: 2026-11-22
-**Status**: DRAFT written in one pass at the student's request. Decisions D-1 to D-9 and the answers to CL-1 to CL-4 are the agent's recommendations and are NOT yet confirmed by the student. Student review is task T-100.
+**Status**: Approved by the student on 2026-11-23 (decisions D-1 to D-9, clarifications CL-1 to CL-4 and thresholds TH-001 to TH-007).
 
 **Governing document**: `.specify/memory/constitution.md` v1.0.0
 
@@ -398,14 +398,14 @@ the fresh-clone run.
 
 ## Clarifications
 
-Open questions for the student (recommended answer first). These are not yet decided.
+Questions raised while the specification was written, with the answers the student confirmed on 2026-11-23.
 
-| ID | Question | Recommended | Affects |
-|----|----------|-------------|---------|
+| ID | Question | Answer | Affects |
+|----|----------|--------|---------|
 | CL-1 | When a clarify is needed, should `title` or `due_at` that are known be reported? | No, keep the result minimal (INV-001). | INV-001 |
 | CL-2 | Is a date with no time defaulted to 09:00 or must the agent ask? | Default 09:00 (TIM-006), so a request like "on March 20" is answerable. | TIM-006 |
 | CL-3 | Should invalid model output be retried once inside the agent? | No (D-5), so failures stay visible to the evaluation. | FR-006 |
-| CL-4 | Are the thresholds (100% for structure, invariants, guardrails and input rejection; 0.85 for intent, field accuracy and the semantic score) acceptable? | Yes, but confirm before the first real run. | TH-001 to TH-007 |
+| CL-4 | Are the thresholds (100% for structure, invariants, guardrails and input rejection; 0.85 for intent, field accuracy and the semantic score) acceptable? | Yes, confirmed by the student before the first real run. | TH-001 to TH-007 |
 
 ## Change History
 
@@ -414,3 +414,4 @@ Open questions for the student (recommended answer first). These are not yet dec
 | 2026-11-22 | Initial draft | First specification before review |
 | 2026-11-22 | Dataset size stated as 40 cases (36 scored, 4 input-rejection) | Dataset built after the first draft |
 | 2026-11-22 | TH-007 added (MET-004 >= 0.85) | Harness check with injected wrong times: verdict was PASS at field accuracy 0.81. Made before any real run. |
+| 2026-11-23 | Status changed to Approved; D-1 to D-9, CL-1 to CL-4 and TH-001 to TH-007 confirmed without change (task T-100) | Student review before the first real evaluation |

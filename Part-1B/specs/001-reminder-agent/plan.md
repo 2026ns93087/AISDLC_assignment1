@@ -1,7 +1,7 @@
 # Implementation Plan: Natural-Language Reminder Agent
 
 **Spec**: [spec.md](spec.md) | **Constitution**: `.specify/memory/constitution.md` v1.0.0
-**Status**: DRAFT, written together with the spec. Not yet reviewed by the student (task T-100).
+**Status**: Approved by the student on 2026-11-23 (task T-100).
 
 ## Summary
 

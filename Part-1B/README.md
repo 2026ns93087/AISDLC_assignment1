@@ -5,7 +5,7 @@ result. It can create a reminder, reschedule or snooze an existing one, ask a qu
 something mandatory is missing, or refuse a request it must not act on. The interpretation is done
 by Google Gemini. The program checks everything the model returns before printing it.
 
-- Specification: [specs/001-reminder-agent/spec.md](specs/001-reminder-agent/spec.md) (draft, awaiting your review)
+- Specification: [specs/001-reminder-agent/spec.md](specs/001-reminder-agent/spec.md) (approved 2026-11-23)
 - Constitution: [.specify/memory/constitution.md](.specify/memory/constitution.md)
 
 ## Setup (Windows PowerShell; macOS and Linux use the same commands with `source .venv/bin/activate`)
